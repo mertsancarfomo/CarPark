@@ -1,0 +1,42 @@
+{
+"id":3 ,
+"height": 4,
+"width": 5,
+
+"cars": [
+    {
+        "startX": 3,
+        "startY": 1,
+        "targetX": 0, 
+        "targetY": 1,
+        "carDirection": "left", 
+        "color": 0 
+    },
+    {
+        "startX": 2,
+        "startY": 1,
+        "targetX": 1, 
+        "targetY": 3,
+        "carDirection": "left",  
+        "color": 1
+    },
+    {
+        "startX": 1,
+        "startY": 2,
+        "targetX": 0, 
+        "targetY": 2, 
+        "carDirection": "left",
+        "color": 2
+    },
+	{
+        "startX": 2,
+        "startY": 2,
+        "targetX": 2, 
+        "targetY": 0, 
+        "carDirection": "down",
+        "color": 3
+    }
+	
+]
+
+}

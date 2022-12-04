@@ -1,0 +1,33 @@
+{
+"id":1,
+"height": 4,
+"width": 3,
+
+"cars": [
+    {
+        "startX": 0,
+        "startY": 1,
+        "targetX": 0, 
+        "targetY": 3,
+        "carDirection": "up", 
+        "color": 0
+    },
+    {
+        "startX": 0,
+        "startY": 2,
+        "targetX": 2, 
+        "targetY": 2,
+        "carDirection": "right",  
+        "color": 1
+    },
+    {
+        "startX": 1,
+        "startY": 2,
+        "targetX": 1, 
+        "targetY": 0, 
+        "carDirection": "down",
+        "color": 2
+    }
+]
+
+}

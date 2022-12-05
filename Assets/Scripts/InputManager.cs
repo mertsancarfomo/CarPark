@@ -94,6 +94,68 @@ public class InputManager : MonoBehaviour
             }
      }
      
+     public static void ClickTile_2Tap_3D(Pathfinding pathfinding)
+     {
+            if (Input.GetMouseButtonDown(0))
+            {
+                RaycastHit hit; 
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+         
+                if(Physics.Raycast (ray,out hit,1000.0f))
+                {
+                    if (isFirstClick)
+                    {
+                        if (hit.transform.childCount == 2) // 1'den fazlaysa arabaya tıklamıştır
+                        {
+                            clickedTileObject = hit.transform;
+                            clickedTileObject.GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
+
+                            int x = int.Parse(hit.collider.transform.gameObject.name.Split(",")[0]);
+                            int y = int.Parse(hit.collider.transform.gameObject.name.Split(",")[1]);
+
+                            clickedCar = pathfinding.grid.GetGridObject(x, y);
+                                
+                            Debug.Log("Testing.cs: ClickTile() -> CAR SELECTED");
+                            isFirstClick = false;
+                        }
+
+                    }
+                    else
+                    {
+                        ColorUtility.TryParseHtmlString("#8E8E8E", out var wayColor); 
+                        if (hit.transform.childCount == 1)
+                        {
+                            int x = int.Parse(hit.collider.transform.gameObject.name.Split(",")[0]);
+                            int y = int.Parse(hit.collider.transform.gameObject.name.Split(",")[1]);
+                            
+                            PathNode targetNode = pathfinding.grid.GetGridObject(x, y);
+
+                            clickedTileObject.GetChild(0).GetComponent<SpriteRenderer>().color = wayColor;
+                            
+                            if (clickedCar.car.targetX == targetNode.x && clickedCar.car.targetY == targetNode.y)
+                            {
+                                // clickedTileObject.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(231, 230, 230, 255);
+                                List<PathNode> path = pathfinding.FindPath(clickedCar.x, clickedCar.y, targetNode.x, targetNode.y);
+                                pathfinding.StartPath(path);
+                                Debug.Log("Testing.cs: ClickTile() -> CAR MOVE");
+                                isFirstClick = true;
+                                return;
+                            }
+                            Debug.Log("Testing.cs: ClickTile() -> There is no car");
+                        }
+                        else
+                        {
+                            clickedTileObject.GetChild(0).GetComponent<SpriteRenderer>().color = wayColor;
+                        }
+
+                        isFirstClick = true;
+
+                    }
+                    
+                }
+            }
+     }
+     
      public static void ClickTile_1Tap(Pathfinding pathfinding)
      {
          if (Input.GetMouseButtonDown(0))
@@ -167,18 +229,28 @@ public class InputManager : MonoBehaviour
      
      public static void SetCameraPosition()
      {
-         // int cameraSize = 1;
-         // if (LevelManager.myLevel.height < LevelManager.myLevel.width)
+
+         // int totalTile = LevelManager.myLevel.height * LevelManager.myLevel.width;
+         int cameraSizeX = 0;
+         int cameraSizeY = 0;
+         int cameraSizeZ = 0;
+         // if (LevelManager.myLevel.height > LevelManager.myLevel.width)
          // {
-         //     cameraSize = LevelManager.myLevel.height * 10;
+         //     cameraSizeX = LevelManager.myLevel.height * 10;
          // }
          // else
          // {
-         //     cameraSize = LevelManager.myLevel.width * 10;
+         //     cameraSizeY = LevelManager.myLevel.width * 10;
          // }
-         //
-         Camera.main.transform.localPosition = new Vector3(LevelManager.myLevel.width * 5, LevelManager.myLevel.height * 5, -10f);
-         Camera.main.GetComponent<Camera>().orthographicSize = (LevelManager.myLevel.width  * 7) + (LevelManager.myLevel.height * 7);
+
+         Camera.main.fieldOfView = LevelManager.myLevel.width * 12.5f;
+         Camera.main.transform.localPosition = new Vector3(LevelManager.myLevel.width * 5, 70, -40);
+         
+         // var left = Camera.main.ViewportToWorldPoint();
+         // var right = Camera.main.ViewportToWorldPoint(Vector3.one);
+
+         // var horizontal = left - right;
+
 
      }
 }

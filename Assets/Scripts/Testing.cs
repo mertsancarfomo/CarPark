@@ -8,13 +8,14 @@ public class Testing : MonoBehaviour
 {
     [Header("Generate Grid")] 
     public GameObject gridObject;
-    public int maxLevelCount;
+    public int startingLevel;
     
     public static Pathfinding pathfinding;
 
 
     void Start()
     {
+        LevelManager.currentLevelId = startingLevel;
         pathfinding = LevelManager.NextLevel();
         //pathfinding = new Pathfinding(5, 5);
     }
@@ -23,7 +24,8 @@ public class Testing : MonoBehaviour
     {
         //InputManager.ClickTile_2Tap(pathfinding);
         //InputManager.ClickTile_1Tap(pathfinding);
-        InputManager.ClickTile_1Tap_3D(pathfinding);
+        //InputManager.ClickTile_1Tap_3D(pathfinding);
+        InputManager.ClickTile_2Tap_3D(pathfinding);
     
         if (LevelManager.levelEnd)
         {

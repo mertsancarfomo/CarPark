@@ -116,7 +116,7 @@ public class Pathfinding
         for (int i = 0; i < path.Count; i++)
         {
             GameObject go =  GameObject.Find(path[i].x + " , " + path[i].y);
-            vectorlist[i] = new Vector3(go.transform.position.x, 0.5f, go.transform.position.z) ;
+            vectorlist[i] = new Vector3(go.transform.position.x, 1, go.transform.position.z) ;
         }
         
         string currentTileObjectName = startNode.x + " , " + startNode.y;

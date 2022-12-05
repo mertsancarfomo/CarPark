@@ -28,7 +28,7 @@ public class Grid {
 
         foreach (LevelManager.Car carData in LevelManager.myLevel.cars)
         {
-            ColorUtility.TryParseHtmlString(CarMovement.carColors[carData.color], out var carColor); 
+            ColorUtility.TryParseHtmlString(Car.carColors[carData.color], out var carColor); 
             ParkingLot parkingLot = new ParkingLot(carData.targetX, carData.targetY, carColor);
             parkingLots.Add(new ParkingLot(carData.targetX, carData.targetY, carColor));
             Car car = new Car(carData.startX, carData.startY, parkingLot, (CarDirection) Enum.Parse(typeof(CarDirection), carData.carDirection, true));

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Prefabs : MonoBehaviour
 {
+    public static Prefabs instance;
+    
     public static GameObject carPrefab;
+    //public List<GameObject> carPrefabs;
     public static GameObject wayPrefab;
     public static GameObject parkinglotPrefab;
-    
-    public List<GameObject> carPrefabs;
-    
-    public static Prefabs instance;
+
 
     void Awake()
     {
@@ -22,19 +22,15 @@ public class Prefabs : MonoBehaviour
         // parkinglotPrefab = gameObject.transform.Find("Parkinglot").gameObject;
  
         // 3D
-        for (int i = 1; i <= 9; i++)
-        {
-            carPrefabs.Add(gameObject.transform.Find("car" + i).gameObject);
-        }
+        // for (int i = 1; i <= 10; i++)
+        // {
+        //     carPrefabs.Add(gameObject.transform.Find("car" + i).gameObject);
+        // }
+        carPrefab = gameObject.transform.Find("car1").gameObject;
         wayPrefab = gameObject.transform.Find("Way").gameObject;
-        //parkinglotPrefab = gameObject.transform.Find("Parkinglot").gameObject;       
-
+        parkinglotPrefab = gameObject.transform.Find("Parkinglot").gameObject;
 
         gameObject.SetActive(false);
-        
-        //carPrefab.SetActive(false);
-        //wayPrefab.SetActive(false);
-        //parkinglotPrefab.SetActive(false);
     }
     
 }

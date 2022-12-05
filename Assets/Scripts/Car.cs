@@ -12,6 +12,8 @@ public enum CarDirection
 
 public class Car 
 {
+    public static Dictionary<int, string> carColors = new Dictionary<int, string>();
+    
     public int startX;
     public int startY;
     public int targetX;
@@ -31,6 +33,25 @@ public class Car
         this.carDirection = carDirection;
 
         color = parkingLot.color;
+    }
+    
+    public static void SetCarColors()
+    {
+        TextAsset txt = (TextAsset)Resources.Load("Other/carColors", typeof(TextAsset));
+        string[] colors = txt.text.Split("\n");
+        
+        for (int i = 0; i < colors.Length; i++)
+        {
+            try
+            {
+                carColors.Add(i, colors[i].Replace("\r", ""));
+            }
+            catch
+            {
+                continue;
+            }
+        }
+
     }
 
 }

@@ -42,7 +42,7 @@ public class LevelManager
     
     public static void SetLevel(string levelName)
     {
-        CarMovement.SetCarColors();
+        global::Car.SetCarColors();
         TextAsset textJSON = (TextAsset)Resources.Load(String.Format("Levels/{0}", levelName), typeof(TextAsset));
         myLevel = JsonUtility.FromJson<LevelData>(textJSON.text);
         myLevel.carCount = myLevel.cars.Length;
@@ -56,6 +56,7 @@ public class LevelManager
         wrongMoveCount = 0;
         //ScreenManager.instance.wrongMoveCountText.text = "Wrong Move: " + wrongMoveCount;
         SetLevel("level"+currentLevelId);
+        InputManager.SetCameraPosition();
         return new Pathfinding(myLevel.width, myLevel.height);
     }
     

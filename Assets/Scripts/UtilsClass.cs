@@ -39,7 +39,7 @@ namespace CodeMonkey.Utils {
             gameObject.AddComponent<BoxCollider>();
             BoxCollider boxCollider = gameObject.GetComponent<BoxCollider>();
             boxCollider.isTrigger = true;
-            boxCollider.size = new Vector3(4f, 2f, 4f);
+            boxCollider.size = new Vector3(7f, 4f, 7f);
             boxCollider.center = new Vector3(0f, 0.6f, 0f);
             
 
@@ -51,7 +51,7 @@ namespace CodeMonkey.Utils {
                 wayObjectTransform.SetParent(gameObject.transform, false);
                 wayObjectTransform.localPosition = new Vector3(0, 0, 0);
                 
-                ColorUtility.TryParseHtmlString("#E7E6E6", out var wayColor);
+                ColorUtility.TryParseHtmlString("#8E8E8E", out var wayColor);
                 wayObjectTransform.GetComponent<SpriteRenderer>().color = wayColor;
             }
 
@@ -64,18 +64,19 @@ namespace CodeMonkey.Utils {
                 wayObjectTransform.SetParent(gameObject.transform, false);
                 wayObjectTransform.localPosition = new Vector3(0, 0, 0);
                 
-                ColorUtility.TryParseHtmlString("#E7E6E6", out var wayColor);
+                ColorUtility.TryParseHtmlString("#8E8E8E", out var wayColor);
                 wayObjectTransform.GetComponent<SpriteRenderer>().color = wayColor;
                 
-                GameObject carObject =  Instantiate(Prefabs.instance.carPrefabs[0]);
+                GameObject carObject =  Instantiate(Prefabs.carPrefab);
                 carObject.SetActive(true);
                 Transform carObjectTransform = carObject.transform;
                 carObjectTransform.SetParent(gameObject.transform, false);
                 // carObjectTransform.localPosition = new Vector3(0, 0, 0); 2D 
-                carObjectTransform.localPosition = new Vector3(0, 0.5f, 0); //3D
-                carObjectTransform.localRotation =  Quaternion.Euler(-90,0,0);//3D
+                carObjectTransform.localPosition = new Vector3(0, 1, 0); //3D
                 // carObjectTransform.GetComponent<SpriteRenderer>().color = node.car.color;
                 
+                MeshRenderer carMeshRenderer = carObjectTransform.GetComponent<MeshRenderer>();
+                carMeshRenderer.materials[3].color = node.car.color;
 
                 if (node.car.carDirection == CarDirection.Up)
                 {
@@ -87,24 +88,24 @@ namespace CodeMonkey.Utils {
                 }
                 else if (node.car.carDirection == CarDirection.Right)
                 {
-                    carObjectTransform.localRotation = Quaternion.Euler(-90,0,-90f);
+                    carObjectTransform.localRotation = Quaternion.Euler(-90,0,90f);
                 }
                 else if (node.car.carDirection == CarDirection.Left)
                 {
-                    carObjectTransform.localRotation = Quaternion.Euler(-90,0,90f);
+                    carObjectTransform.localRotation = Quaternion.Euler(-90,0,-90f);
                 }
             }
             
             else if (node.tile == TileType.ParkingLot)
             {
-                GameObject wayObject =  Instantiate(Prefabs.wayPrefab); //Prefabs.parkinglotPrefab TODO: fix later
+                GameObject wayObject =  Instantiate(Prefabs.parkinglotPrefab);
                 wayObject.SetActive(true);
                 Transform wayObjectTransform = wayObject.transform;
                 wayObjectTransform.SetParent(gameObject.transform, false);
                 wayObjectTransform.localPosition = new Vector3(0, 0, 0);
 
-                // Transform parkingText = wayObject.transform.GetChild(0);
-                // parkingText.GetComponent<SpriteRenderer>().color = node.parkingLot.color;
+                Transform parkingText = wayObject.transform.GetChild(0);
+                parkingText.GetComponent<SpriteRenderer>().color = node.parkingLot.color;
             }
             
         }

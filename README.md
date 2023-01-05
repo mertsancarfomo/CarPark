@@ -1,3 +1,3 @@
 # CarPark
 
-Clone of ParkingJam from Popcore
+Clone of Popcore's ParkingJam game
